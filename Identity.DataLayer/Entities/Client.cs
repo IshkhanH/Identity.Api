@@ -1,5 +1,4 @@
-﻿using System.Data;
-namespace Identity.DataLayer.Entities
+﻿namespace Identity.DataLayer.Entities
 {
     public class Client
     {

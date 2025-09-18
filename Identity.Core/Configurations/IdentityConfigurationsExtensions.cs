@@ -1,13 +1,12 @@
 ﻿using System.Data;
 using System.Reflection;
 using FluentValidation;
+using Identity.Core.Configurations.Options;
 using Identity.Core.Interfaces;
 using Identity.Core.Services;
 using Identity.Core.Services.Repositories;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 
 namespace Identity.Core.Configurations
 {
@@ -21,12 +20,16 @@ namespace Identity.Core.Configurations
             IConfiguration configuration
             )
         {
+            services.Configure<JWTConfigurationOptions>(options => configuration.GetSection(nameof(JWTConfigurationOptions)).Bind(options));
+            var jwtConfigs = configuration.GetSection(nameof(JWTConfigurationOptions)).Get<JWTConfigurationOptions>();
+
+            services.AddScoped<ITokenGenerator, TokenGenerator>();
+            services.AddScoped<IIdentityService, IdentityService>();
+
             services.AddScoped<IClientRepository, ClientRepository>();
-            services.AddScoped<IClientService, ClientService>();
-
             services.AddScoped<IUserRepository, UserRepositօry>();
-            services.AddScoped<IUserService, UserService>();
-
+            
+            services.AddScoped<IClientService, ClientService>();
 
             services.AddValidatorsFromAssembly(_assembly);
 

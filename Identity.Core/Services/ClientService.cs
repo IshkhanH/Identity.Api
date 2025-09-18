@@ -28,7 +28,6 @@ namespace Identity.Core.Services
 
             if (!validationResult.IsValid)
             {
-                // change
                 throw new InvalidDataException(nameof(model));
             }
 
