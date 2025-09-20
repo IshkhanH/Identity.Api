@@ -59,7 +59,8 @@ namespace Identity.Core.Services
             }
 
             await _clientRepository.UpdateAsync(new Client
-            {
+            { 
+                Id = id,
                 Mail = model.Mail,
                 Address = model.Address,
                 Passport = model.Passport,
@@ -67,6 +68,7 @@ namespace Identity.Core.Services
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
+                UserId= model.UserId,
             });
         }
 
