@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureIdentityCore(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 
 var jwtConfigs = builder.Configuration.GetSection(nameof(JWTConfigurationOptions)).Get<JWTConfigurationOptions>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

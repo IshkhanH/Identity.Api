@@ -8,8 +8,7 @@ namespace Identity.Core.Validators.User
         public LoginValidator()
         {
             RuleFor(i => i.Email).NotEmpty().EmailAddress();
-            RuleFor(i => i.Password).NotEmpty()
-                                    .MinimumLength(8);
+            RuleFor(i => i.Password).NotEmpty().MinimumLength(8);
         }
     }
 }

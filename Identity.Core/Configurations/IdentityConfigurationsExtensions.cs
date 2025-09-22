@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Reflection;
+﻿using System.Reflection;
 using FluentValidation;
 using Identity.Core.Configurations.Options;
 using Identity.Core.Interfaces;
@@ -21,13 +20,12 @@ namespace Identity.Core.Configurations
             )
         {
             services.Configure<JWTConfigurationOptions>(options => configuration.GetSection(nameof(JWTConfigurationOptions)).Bind(options));
-            var jwtConfigs = configuration.GetSection(nameof(JWTConfigurationOptions)).Get<JWTConfigurationOptions>();
-
+            
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<IIdentityService, IdentityService>();
 
             services.AddScoped<IClientRepository, ClientRepository>();
-            services.AddScoped<IUserRepository, UserRepositօry>();
+            services.AddScoped<IUserRepository, UserRepository>();
             
             services.AddScoped<IClientService, ClientService>();
 

@@ -6,11 +6,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace Identity.Core.Services.Repositories
 {
-    public class UserRepositօry : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly string _connectionString;
 
-        public UserRepositօry(IConfiguration configuration)
+        public UserRepository(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }

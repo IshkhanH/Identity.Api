@@ -5,12 +5,12 @@ namespace Identity.Core.Helpers
 {
     public static class HashHelper
     {
-        public static string GetHash(string password, string solt)
+        public static string GetHash(string password, string salt)
         {
             var passHash = GenerateHash(password);
-            var soltHash = GenerateHash(solt);
+            var saltHash = GenerateHash(salt);
 
-            return soltHash + passHash;
+            return saltHash + passHash;
         }
 
         private static string GenerateHash(string toHash)
