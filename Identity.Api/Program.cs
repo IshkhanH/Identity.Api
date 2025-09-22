@@ -7,7 +7,6 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.ConfigureIdentityCore(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -60,6 +59,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+IdentityConfigurations.ConfigureIdentityCore(builder.Services, builder.Configuration);
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

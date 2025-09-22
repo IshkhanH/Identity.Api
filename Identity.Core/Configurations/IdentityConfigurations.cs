@@ -9,13 +9,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Identity.Core.Configurations
 {
-    public static class IdentityConfigurationsExtensions
+    public static class IdentityConfigurations
     {
         private static readonly Assembly _assembly = 
-            typeof(IdentityConfigurationsExtensions).Assembly;
+            typeof(IdentityConfigurations).Assembly;
 
         public static IServiceCollection ConfigureIdentityCore(
-            this IServiceCollection services,
+            IServiceCollection services,
             IConfiguration configuration
             )
         {
