@@ -56,10 +56,7 @@ namespace Identity.Core.Services
             var userId = await _userRepository.CreateAsync(new DataLayer.Entities.User
             {
                 Password = passwrodHash,
-                Email = request.Email,
-                IsDeleted = false,
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now
+                Email = request.Email,                
             });
 
             return new AuthResponse

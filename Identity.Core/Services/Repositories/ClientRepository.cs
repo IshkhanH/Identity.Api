@@ -28,7 +28,7 @@ namespace Identity.Core.Services.Repositories
                     AddParam(cmd, "@PhoneNumber", client.PhoneNumber);
                     AddParam(cmd, "@Address", client.Address);
                     AddParam(cmd, "@Mail", client.Mail);
-                    AddParam(cmd, "@UserId", client.UserId); //client.UserId);
+                    AddParam(cmd, "@UserId", client.UserId); 
 
                     await conn.OpenAsync();
                     var result = await cmd.ExecuteScalarAsync();
@@ -89,7 +89,7 @@ namespace Identity.Core.Services.Repositories
                     AddParam(cmd, "@PhoneNumber", client.PhoneNumber);
                     AddParam(cmd, "@Address", client.Address);
                     AddParam(cmd, "@Mail", client.Mail);
-                    AddParam(cmd, "@UserId", client.UserId); //client.UserId);
+                    AddParam(cmd, "@UserId", client.UserId); 
 
                     await conn.OpenAsync();
                     await cmd.ExecuteNonQueryAsync();
