@@ -3,7 +3,6 @@ using Identity.Core.Interfaces;
 using Identity.Core.Models.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Identity.DataLayer.Entities;
-using System.Reflection;
 
 namespace Identity.Core.Services
 {
