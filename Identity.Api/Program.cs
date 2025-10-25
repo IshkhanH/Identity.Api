@@ -1,15 +1,21 @@
-using System.Text;
+﻿using System.Text;
 using Identity.Core.Configurations;
 using Identity.Core.Configurations.Options;
+using Identity.Core.Interfaces;
+using Identity.DataLayer.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
 
 var jwtConfigs = builder.Configuration.GetSection(nameof(JWTConfigurationOptions)).Get<JWTConfigurationOptions>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -57,6 +63,12 @@ builder.Services.AddSwaggerGen(c =>
             new List<string>()
         }
     });
+    c.MapType<string>(() => new Microsoft.OpenApi.Models.OpenApiSchema
+    {
+        Type = "string",
+        Example = new Microsoft.OpenApi.Any.OpenApiString(string.Empty)
+    });
+    
 });
 
 IdentityConfigurations.ConfigureIdentityCore(builder.Services, builder.Configuration);
@@ -70,7 +82,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();

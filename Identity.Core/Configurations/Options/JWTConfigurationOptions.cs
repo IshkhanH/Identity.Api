@@ -10,5 +10,8 @@
         public bool ValidateLifetime { get; set; }
         public bool ValidateIssuerSigningKey { get; set; }
         public int LifeTime { get; set; }
+        public int RefreshTokenLifeTime { get; set; }
+        public bool EnableRefreshToken { get; set; } = true;
+
     }
 }

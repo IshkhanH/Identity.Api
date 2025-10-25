@@ -15,10 +15,9 @@ namespace Identity.Core.Helpers
 
         private static string GenerateHash(string toHash)
         {
-            var crypt = SHA256.Create();
 
             string hash = String.Empty;
-            byte[] crypto = crypt.ComputeHash(Encoding.ASCII.GetBytes(toHash));
+            byte[] crypto = SHA256.HashData(Encoding.ASCII.GetBytes(toHash));
 
             foreach (byte theByte in crypto)
             {

@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using Identity.Core.Configurations.Options;
 using Identity.Core.Interfaces;
@@ -26,10 +27,11 @@ namespace Identity.Core.Services
             var claims = new[]
             {
                 new Claim(JWTCustomClaims.Email, email),
-                new Claim(JWTCustomClaims.Id, id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, id.ToString()),
+                new Claim("nameid", id.ToString())
             };
 
-            var now = DateTime.Now;
+            var now = DateTime.UtcNow;
             var token = new JwtSecurityToken
             (
                 issuer: _configs.ValidIssuer,
@@ -42,6 +44,14 @@ namespace Identity.Core.Services
 
             var encoded = new JwtSecurityTokenHandler().WriteToken(token);
             return encoded;
+
+        }
+        public string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[64];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
         }
     }
 }
